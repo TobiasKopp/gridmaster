@@ -17,7 +17,7 @@ class LevelChooser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GenerateButton(nTiles: genSize),

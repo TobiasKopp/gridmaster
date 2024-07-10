@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grid_master/controls/input_sequence.dart';
 import 'package:grid_master/tiles/tile_widget.dart';
 import 'dart:math';
 
@@ -16,5 +17,25 @@ class Data extends ChangeNotifier {
     tiles = newValue;
     notifyListeners();
   }
+
+  /// GLOBAL INPUT SEQUENCE
+  InputSequence inputSequence = InputSequence();
+  void inputSequenceAdd(InputAction action) {
+    inputSequence.push(action);
+    notifyListeners();
+  }
+  void inputSequenceAddAll(Iterable<InputAction> actions) {
+    inputSequence.pushAll(actions);
+    notifyListeners();
+  }
+  void inputSequenceRemoveLast() {
+    inputSequence.pop();
+    notifyListeners();
+  }
+  void inputSequenceClear() {
+    inputSequence.clear();
+    notifyListeners();
+  }
+
 
 }

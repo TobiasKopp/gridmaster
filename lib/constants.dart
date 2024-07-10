@@ -7,6 +7,7 @@ const Color kColorFloorTile = Color(0xff7dabc7);
 const Color kColorStartTile = Color(0xff70d93d);
 const Color kColorEndTile = Color(0xff9710af);
 const Color kColorControllerArrow = Color(0xff3d3d3d);
+const Color kColorInputSequenceDisplay = Colors.grey;
 
 
 const double kGridLineThickness = 0.4;

@@ -1,37 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-enum ArrowButtonDirection {
-  up, down, left, right;
+import '../data.dart';
+import 'input_sequence.dart';
 
-  IconData getIcon() {
-    switch (this) {
-      case up:    return Icons.arrow_upward;
-      case down:  return Icons.arrow_downward;
-      case left:  return Icons.arrow_back;
-      case right: return Icons.arrow_forward;
-    }
-  }
-}
-
-class ArrowButton extends StatelessWidget {
-  const ArrowButton({
-    required this.direction,
+class InputActionButton extends StatelessWidget {
+  const InputActionButton({
+    required this.action,
     Key? key
   }) : super(key: key);
 
-  final ArrowButtonDirection direction;
+  final InputAction action;
 
   @override
   Widget build(BuildContext context) {
     IconData iconData;
 
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => Provider.of<Data>(context, listen: false).inputSequenceAdd(action.getInputAction()),
       style: ButtonStyle(
+        // TODO
 
       ),
       child: Icon(
-        direction.getIcon(),
+        action.getIcon(),
       )
     );
   }

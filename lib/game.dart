@@ -15,17 +15,22 @@ class GameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LevelChooser(genSize: width * height),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GridWidget(
+              width: width,
+              height: height,
+            ),
 
-        GridWidget(
-          width: width,
-          height: height,
+            const ControllerWidget(),
+          ],
         ),
 
-        ControllerWidget(),
+        LevelChooser(genSize: width * height),
       ],
     );
   }

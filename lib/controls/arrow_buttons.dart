@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grid_master/constants.dart';
+import 'package:grid_master/controls/input_sequence.dart';
 
 import 'arrow_button.dart';
 
@@ -34,7 +35,7 @@ class ArrowUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArrowButton(direction: ArrowButtonDirection.up);
+    return const InputActionButton(action: InputAction.moveUp);
   }
 }
 
@@ -43,7 +44,7 @@ class ArrowDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArrowButton(direction: ArrowButtonDirection.down);
+    return const InputActionButton(action: InputAction.moveDown);
   }
 }
 
@@ -52,7 +53,7 @@ class ArrowLeft extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArrowButton(direction: ArrowButtonDirection.left);
+    return const InputActionButton(action: InputAction.moveLeft);
   }
 }
 
@@ -61,6 +62,6 @@ class ArrowRight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArrowButton(direction: ArrowButtonDirection.right);
+    return const InputActionButton(action: InputAction.moveRight);
   }
 }
