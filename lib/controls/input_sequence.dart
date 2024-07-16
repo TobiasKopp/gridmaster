@@ -12,14 +12,6 @@ enum InputAction {
     }
   }
 
-  InputAction getInputAction() {
-    switch (this) {
-      case moveUp:    return InputAction.moveUp;
-      case moveDown:  return InputAction.moveDown;
-      case moveLeft:  return InputAction.moveLeft;
-      case moveRight: return InputAction.moveRight;
-    }
-  }
 }
 
 class InputSequence {

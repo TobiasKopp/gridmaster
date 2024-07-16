@@ -12,11 +12,11 @@ class PopActionButton extends StatelessWidget {
 
     return ElevatedButton(
         onPressed: () => Provider.of<Data>(context, listen: false).inputSequenceRemoveLast(),
-        style: ButtonStyle(
+        style: const ButtonStyle(
           // TODO
 
         ),
-        child: Icon(
+        child: const Icon(
             Icons.backspace
         )
     );

@@ -14,10 +14,8 @@ class InputActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IconData iconData;
-
     return ElevatedButton(
-      onPressed: () => Provider.of<Data>(context, listen: false).inputSequenceAdd(action.getInputAction()),
+      onPressed: () => Provider.of<Data>(context, listen: false).inputSequenceAdd(action),
       style: ButtonStyle(
         // TODO
 
