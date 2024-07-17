@@ -3,6 +3,7 @@ import 'package:grid_master/constants.dart';
 import 'package:grid_master/controls/clear_button.dart';
 import 'package:grid_master/controls/input_sequence_display.dart';
 import 'package:grid_master/controls/pop_action_button.dart';
+import 'package:grid_master/controls/start_button.dart';
 
 import 'arrow_buttons.dart';
 
@@ -18,9 +19,11 @@ class ControllerWidget extends StatelessWidget {
         kHSpace_16,
         Column(
           children: [
-            ClearButton(),
-            kVSpace_32,
             PopActionButton(),
+            kVSpace_16,
+            ClearButton(),
+            kVSpace_16,
+            StartButton(),
           ],
         ),
         InputSequenceDisplay(),

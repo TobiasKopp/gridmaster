@@ -23,7 +23,7 @@ class InputSequenceDisplay extends StatelessWidget {
       color: kColorInputSequenceDisplay,
       padding: EdgeInsets.all(8.0),
       child: Wrap(
-        children: Provider.of<Data>(context).inputSequence.actions.map((InputAction action) => Icon(action.getIcon())).toList(),
+        children: Provider.of<Data>(context).inputSequence.inputs.map((InputAction action) => Icon(action.getIcon())).toList(),
       ),
     );
   }

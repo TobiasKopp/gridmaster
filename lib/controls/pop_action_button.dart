@@ -8,8 +8,6 @@ class PopActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IconData iconData;
-
     return ElevatedButton(
         onPressed: () => Provider.of<Data>(context, listen: false).inputSequenceRemoveLast(),
         style: const ButtonStyle(

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../data.dart';
 import '../generate_button.dart';
-import '../levels/grid_converter.dart';
 import '../levels/level_1.dart';
 import '../levels/level_2.dart';
 
@@ -22,12 +21,12 @@ class LevelChooser extends StatelessWidget {
       children: [
         GenerateButton(nTiles: genSize),
         IconButton(
-          onPressed: () => Provider.of<Data>(context, listen: false).setTiles(GridConverter.convert(LEVEL_1().getGrid())),
+          onPressed: () => Provider.of<Data>(context, listen: false).setLevel(LEVEL_1()),
           icon: Text("1", style: TextStyle(fontSize: 30),),
           iconSize: 40,
         ),
         IconButton(
-          onPressed: () => Provider.of<Data>(context, listen: false).setTiles(GridConverter.convert(LEVEL_2().getGrid())),
+          onPressed: () => Provider.of<Data>(context, listen: false).setLevel(LEVEL_2()),
           icon: Text("2", style: TextStyle(fontSize: 30),),
           iconSize: 40,
         ),

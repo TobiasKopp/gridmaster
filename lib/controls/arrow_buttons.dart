@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grid_master/constants.dart';
 import 'package:grid_master/controls/input_sequence.dart';
 
-import 'arrow_button.dart';
+import 'input_action_button.dart';
 
 class ArrowButtons extends StatelessWidget {
   const ArrowButtons({Key? key}) : super(key: key);

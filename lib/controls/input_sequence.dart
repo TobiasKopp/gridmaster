@@ -14,12 +14,8 @@ enum InputAction {
 
 }
 
-class InputSequence {
+class InputActionSequence {
   List<InputAction> inputs = [];
-
-  List<InputAction> get actions {
-    return inputs;
-  }
 
   void push(InputAction action) {
     inputs.add(action);

@@ -23,29 +23,59 @@ class GridWidget extends StatefulWidget {
 }
 
 class _GridWidgetState extends State<GridWidget> {
-   @override
+  bool isAnimating = false;
+
+
+  @override
   void initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var playerSize = widget.tileSize - 10;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
         width: widget.width * widget.tileSize + 2*kGridLineThickness,
         height: widget.height * widget.tileSize + 2*kGridLineThickness,
         color: kColorGridLines,
-        child: SizedBox(
-          width: widget.width * widget.tileSize,
-          height: widget.height * widget.tileSize,
-          child: GridView.count(
-            crossAxisCount: widget.width,
-            children: Provider.of<Data>(context).tiles,
-          ),
+        alignment: Alignment.center,
+        child: Stack(
+          children: [
+            SizedBox(
+              width: widget.width * widget.tileSize,
+              height: widget.height * widget.tileSize,
+              child: GridView.count(
+                crossAxisCount: widget.width,
+                children: Provider.of<Data>(context).tiles,
+              ),
+            ),
+
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 700),
+              child: SizedBox(
+                width: widget.tileSize,
+                height: widget.tileSize,
+                child: Center(
+                  child: Container(
+                    width: playerSize,
+                    height: playerSize,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(playerSize/2),
+                      color: kColorPlayer,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         )
       ),
     );
   }
+
 }
+
+
 
