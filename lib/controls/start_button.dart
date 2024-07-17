@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:grid_master/data.dart';
 
+import '../grid_widget.dart';
+
 class StartButton extends StatelessWidget {
   const StartButton({Key? key}) : super(key: key);
 
@@ -48,7 +50,7 @@ class StartButton extends StatelessWidget {
           }
 
 
-
+          PLAYER_STREAM_CONTROLLER.sink.add(positions);
 
 
 

@@ -1,7 +1,10 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:grid_master/controls/input_sequence.dart';
 import 'package:grid_master/levels/level_1.dart';
 import 'package:grid_master/tiles/tile_widget.dart';
+import 'package:tuple/tuple.dart';
 import 'dart:math';
 
 import 'levels/grid_converter.dart';
@@ -45,6 +48,10 @@ class Data extends ChangeNotifier {
     inputSequence.clear();
     notifyListeners();
   }
+
+
+  /// POSITIONS TO MOVE PLAYER TO
+  Queue<Tuple2<int, int>> MOVES = Queue();
 
 
 }
