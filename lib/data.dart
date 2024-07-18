@@ -1,27 +1,25 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
+import 'package:grid_master/constants.dart';
 import 'package:grid_master/controls/input_sequence.dart';
-import 'package:grid_master/levels/level_1.dart';
 import 'package:grid_master/tiles/tile_widget.dart';
-import 'package:tuple/tuple.dart';
 import 'dart:math';
 
+import 'game/level.dart';
+import 'game/tile.dart';
 import 'levels/grid_converter.dart';
-import 'levels/level.dart';
 
 class Data extends ChangeNotifier {
 
   /// CURRENT LEVEL
-  level LEVEL = LEVEL_1();
-  void setLevel(level newValue) {
+  Level LEVEL = L_DEFAULT;
+  void setLevel(Level newValue) {
     LEVEL = newValue;
-    tiles = GridConverter.convert(LEVEL.getGrid());
+    tiles = GridConverter.convertGrid(LEVEL.grid);
     notifyListeners();
   }
 
   /// CURRENT GRID TILES
-  List<Widget> tiles = GridConverter.convert(LEVEL_1().getGrid());
+  List<Widget> tiles = GridConverter.convertGrid(L_DEFAULT.grid);
   void generateRandomTiles(int n) {
     tiles = List.generate(n, (index) => TileWidget(
       type: TileType.values[Random().nextInt(TileType.values.length)],
@@ -48,10 +46,4 @@ class Data extends ChangeNotifier {
     inputSequence.clear();
     notifyListeners();
   }
-
-
-  /// POSITIONS TO MOVE PLAYER TO
-  Queue<Tuple2<int, int>> MOVES = Queue();
-
-
 }

@@ -1,9 +1,9 @@
-import 'level.dart';
+import '../../game/level.dart';
+import 'package:grid_master/game/grid.dart';
 
-class LEVEL_1 implements level {
-  @override
-  List<List<String>> getGrid() {
-    return [
+final Level L_TUTORIAL_1 = Level(
+  grid: Grid.fromRaw(
+    [
       ['W', 'W', 'W', 'W', 'W', 'E', 'W', 'W', 'W', 'W', 'W'],
       ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
       ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
@@ -15,13 +15,6 @@ class LEVEL_1 implements level {
       ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
       ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
       ['W', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'W'],
-    ];
-  }
-
-  @override
-  List<String> getSolution() {
-    // TODO: implement getSolution
-    throw UnimplementedError();
-  }
-
-}
+    ]
+  )
+);

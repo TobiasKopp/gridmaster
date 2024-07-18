@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:grid_master/levels/tutorial/tutorial_1.dart';
 
 /// COLORS
 const Color kColorGridLines = Color(0xff000000);
 const Color kColorWallTile = Color(0xff17232b);
 const Color kColorFloorTile = Color(0xff7dabc7);
 const Color kColorStartTile = Color(0xff70d93d);
-const Color kColorEndTile = Color(0xff9710af);
+const Color kColorGoalTile = Color(0xff9710af);
 const Color kColorPlayer = Color(0xffd51313);
 const Color kColorControllerArrow = Color(0xff3d3d3d);
 const Color kColorInputSequenceDisplay = Colors.grey;
@@ -32,3 +33,6 @@ const Widget kHSpace_16 = SizedBox(width: 16);
 const Widget kHSpace_20 = SizedBox(width: 20);
 const Widget kHSpace_24 = SizedBox(width: 24);
 const Widget kHSpace_32 = SizedBox(width: 32);
+
+/// DEFAULT LEVEL
+final L_DEFAULT = L_TUTORIAL_1;

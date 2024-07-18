@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../data.dart';
 import '../generate_button.dart';
-import '../levels/level_1.dart';
-import '../levels/level_2.dart';
+import '../levels/tutorial/tutorial_1.dart';
+import '../levels/tutorial/tutorial_5.dart';
 
 class LevelChooser extends StatelessWidget {
   const LevelChooser({
@@ -21,13 +21,13 @@ class LevelChooser extends StatelessWidget {
       children: [
         GenerateButton(nTiles: genSize),
         IconButton(
-          onPressed: () => Provider.of<Data>(context, listen: false).setLevel(LEVEL_1()),
+          onPressed: () => Provider.of<Data>(context, listen: false).setLevel(L_TUTORIAL_1),
           icon: Text("1", style: TextStyle(fontSize: 30),),
           iconSize: 40,
         ),
         IconButton(
-          onPressed: () => Provider.of<Data>(context, listen: false).setLevel(LEVEL_2()),
-          icon: Text("2", style: TextStyle(fontSize: 30),),
+          onPressed: () => Provider.of<Data>(context, listen: false).setLevel(L_TUTORIAL_5),
+          icon: Text("5", style: TextStyle(fontSize: 30),),
           iconSize: 40,
         ),
       ],

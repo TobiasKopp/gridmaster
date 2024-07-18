@@ -3,12 +3,12 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 import 'constants.dart';
 import 'data.dart';
+import 'game/position.dart';
 
-final StreamController<Queue<Tuple2<int, int>>> PLAYER_STREAM_CONTROLLER = StreamController<Queue<Tuple2<int, int>>>();
+final StreamController<Queue<Position>> PLAYER_STREAM_CONTROLLER = StreamController<Queue<Position>>();
 
 class GridWidget extends StatefulWidget {
   GridWidget({
@@ -31,11 +31,11 @@ class GridWidget extends StatefulWidget {
 }
 
 class _GridWidgetState extends State<GridWidget> {
-  Tuple2 playerPosition = Tuple2(0, 0);
+  Position playerPosition = Position(0, 0);
 
   bool isAnimating = false;
 
-  late Stream<Queue<Tuple2<int, int>>> moveStream;
+  late Stream<Queue<Position>> moveStream;
 
   @override
   void initState() {
@@ -53,8 +53,8 @@ class _GridWidgetState extends State<GridWidget> {
   Widget build(BuildContext context) {
     var playerSize = widget.tileSize - 20;
     Widget player = AnimatedPositioned(
-      top: playerPosition.item1 * widget.tileSize,
-      left: playerPosition.item2 * widget.tileSize,
+      top: playerPosition.row * widget.tileSize,
+      left: playerPosition.column * widget.tileSize,
       duration: widget.animationDuration,
       curve: Curves.easeInOut,
       child: AnimatedOpacity(

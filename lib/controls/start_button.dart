@@ -3,9 +3,10 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:grid_master/controls/input_sequence.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 import 'package:grid_master/data.dart';
 
+import '../game/grid.dart';
+import '../game/position.dart';
 import '../grid_widget.dart';
 
 class StartButton extends StatelessWidget {
@@ -15,9 +16,9 @@ class StartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          List<List<String>> grid = Provider.of<Data>(context, listen: false).LEVEL.getGrid();
+          Grid grid = Provider.of<Data>(context, listen: false).LEVEL.grid;
           InputActionSequence inputSequence = Provider.of<Data>(context, listen: false).inputSequence;
-          Queue<Tuple2<int,int>> positions = Queue();
+          Queue<Position> positions = Queue();
 
           if (inputSequence.inputs.isEmpty) {
             showDialog(
@@ -33,15 +34,8 @@ class StartButton extends StatelessWidget {
           }
 
           // Get start position
-          Tuple2<int, int> pos = Tuple2(0, 0);
-          for (int i=0; i<grid.length; i++) {
-            for (int j=0; j<grid[i].length; j++) {
-              if (grid[i][j] == 'S') {
-                pos = Tuple2(i, j);
-                positions.add(Tuple2(i, j));
-              }
-            }
-          }
+          Position pos = grid.start();
+          positions.add(pos);
 
           // Go through inputs
           for (var action in inputSequence.inputs) {
@@ -64,47 +58,47 @@ class StartButton extends StatelessWidget {
     );
   }
 
-  static Tuple2<int, int> computeNextTile(BuildContext context, List<List<String>> grid, Tuple2<int, int> pos, InputAction action) {
+  static Position computeNextTile(BuildContext context, Grid grid, Position pos, InputAction action) {
     switch (action) {
       case InputAction.moveUp:
-        int i = pos.item1 - 1;
-        int j = pos.item2;
+        int i = pos.row - 1;
+        int j = pos.column;
         while (i >= 0) {
-          if (grid[i][j] == 'E' || grid[i][j] == 'S') { return Tuple2(i, j); }   // Start / Stop on end tile
-          if (grid[i][j] == 'W') { return Tuple2(i+1, j); }                      // Move until wall
-          if (grid[i][j] == 'F') { i--; }                                        // Move up when on floor
+          if (grid.atIndex(i,j).isGoal || grid.atIndex(i,j).isStart) { return Position(i,j); }   // Start / Stop on end tile
+          if (grid.atIndex(i,j).isWall) { return Position(i+1, j); }                      // Move until wall
+          if (grid.atIndex(i,j).isFloor) { i--; }                                        // Move up when on floor
         }
-        return Tuple2(i+1, j);
+        return Position(i+1, j);
 
       case InputAction.moveDown:
-        int i = pos.item1 + 1;
-        int j = pos.item2;
-        while (i < grid.length) {
-          if (grid[i][j] == 'E' || grid[i][j] == 'S') { return Tuple2(i, j); }   // Start / Stop on end tile
-          if (grid[i][j] == 'W') { return Tuple2(i-1, j); }                      // Move until wall
-          if (grid[i][j] == 'F') { i++; }                                        // Move up when on floor
+        int i = pos.row + 1;
+        int j = pos.column;
+        while (i < grid.height) {
+          if (grid.atIndex(i,j).isGoal || grid.atIndex(i,j).isStart) { return Position(i, j); }   // Start / Stop on end tile
+          if (grid.atIndex(i,j).isWall) { return Position(i-1, j); }                      // Move until wall
+          if (grid.atIndex(i,j).isFloor) { i++; }                                        // Move up when on floor
         }
-        return Tuple2(i-1, j);
+        return Position(i-1, j);
 
       case InputAction.moveLeft:
-        int i = pos.item1;
-        int j = pos.item2 - 1;
+        int i = pos.row;
+        int j = pos.column - 1;
         while (j >= 0) {
-          if (grid[i][j] == 'E' || grid[i][j] == 'S') { return Tuple2(i, j); }   // Start / Stop on end tile
-          if (grid[i][j] == 'W') { return Tuple2(i, j+1); }                      // Move until wall
-          if (grid[i][j] == 'F') { j--; }                                        // Move up when on floor
+          if (grid.atIndex(i,j).isGoal || grid.atIndex(i,j).isStart) { return Position(i, j); }   // Start / Stop on end tile
+          if (grid.atIndex(i,j).isWall) { return Position(i, j+1); }                      // Move until wall
+          if (grid.atIndex(i,j).isFloor) { j--; }                                        // Move up when on floor
         }
-        return Tuple2(i, j+1);
+        return Position(i, j+1);
 
       case InputAction.moveRight:
-        int i = pos.item1;
-        int j = pos.item2 + 1;
-        while (j < grid[i].length) {
-          if (grid[i][j] == 'E' || grid[i][j] == 'S') { return Tuple2(i, j); }   // Start / Stop on end tile
-          if (grid[i][j] == 'W') { return Tuple2(i, j-1); }                      // Move until wall
-          if (grid[i][j] == 'F') { j++; }                                        // Move up when on floor
+        int i = pos.row;
+        int j = pos.column + 1;
+        while (j < grid.width) {
+          if (grid.atIndex(i,j).isGoal || grid.atIndex(i,j).isStart) { return Position(i, j); }   // Start / Stop on end tile
+          if (grid.atIndex(i,j).isWall) { return Position(i, j-1); }                      // Move until wall
+          if (grid.atIndex(i,j).isFloor) { j++; }                                        // Move up when on floor
         }
-        return Tuple2(i, j-1);
+        return Position(i, j-1);
 
       default:
         throw Exception("Unreachable");

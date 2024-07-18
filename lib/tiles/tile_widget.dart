@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import '../game/tile.dart';
 
-enum TileType {
-  wall, floor, start, end;
-
-  static getType(String s) {
-    switch (s) {
-      case 'W': return wall;
-      case 'F': return floor;
-      case 'S': return start;
-      case 'E': return end;
-    }
-  }
-}
 
 class TileWidget extends StatelessWidget {
   const TileWidget({
@@ -48,7 +37,7 @@ class TileWidget extends StatelessWidget {
       case TileType.wall: return kColorWallTile;
       case TileType.floor: return kColorFloorTile;
       case TileType.start: return kColorStartTile;
-      case TileType.end: return kColorEndTile;
+      case TileType.goal: return kColorGoalTile;
     }
   }
 }

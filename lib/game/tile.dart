@@ -11,8 +11,7 @@ enum TileType {
 
   factory TileType.fromString(String s) {
     return values.firstWhere((e) => e.textRepresentation == s);
-}
-
+  }
 }
 
 
