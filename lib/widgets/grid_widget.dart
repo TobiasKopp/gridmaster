@@ -18,14 +18,19 @@ class GridWidget extends StatefulWidget {
     tileWidgets = GridConverter.convertGrid(level.grid);
   }
 
+  // Defining properties
   final Level level;
   late List<Widget> tileWidgets;
 
+  // Logic
+  Stream<Queue<Position>> moveStream = PLAYER_STREAM_CONTROLLER.stream;
+
+  // Visuals
   final double tileSize = 50;
   final Color backgroundColor = Colors.blueGrey;
   final double borderThickness = 1;
-
   final Duration animationDuration = const Duration(milliseconds: 700);
+
 
   @override
   State<GridWidget> createState() => _GridWidgetState();
@@ -34,15 +39,16 @@ class GridWidget extends StatefulWidget {
 class _GridWidgetState extends State<GridWidget> {
   late Position playerPosition;
   bool isAnimating = false;
-  late Stream<Queue<Position>> moveStream;
+  bool isPlayerShown = false;
+  late Queue<Position> moves;
 
   @override
   void initState() {
     playerPosition = widget.level.grid.start();
-    moveStream = PLAYER_STREAM_CONTROLLER.stream;
-    moveStream.listen((queue) {
+    widget.moveStream.listen((queue) {
       setState(() {
-        playerPosition = queue.first;
+        if (!isAnimating) isAnimating = true;
+        moves = queue;
       });
     });
     super.initState();
@@ -57,9 +63,11 @@ class _GridWidgetState extends State<GridWidget> {
       left: playerPosition.column * widget.tileSize,
       duration: widget.animationDuration,
       curve: Curves.easeInOut,
+      onEnd: () => onAnimationEnd(),
       child: AnimatedOpacity(
         opacity: isAnimating ? 1 : 0,
         duration: widget.animationDuration,
+        onEnd: onAnimationEnd,
         child: SizedBox(
           width: widget.tileSize,
           height: widget.tileSize,
@@ -96,11 +104,35 @@ class _GridWidgetState extends State<GridWidget> {
               ),
             ),
 
-            if (isAnimating) player,
+            player,
           ],
         )
       ),
     );
+  }
+
+  void onAnimationEnd() {
+    // if (!isPlayerShown) {
+    //   isPlayerShown = true;
+    // }
+
+    if (moves.isEmpty) {
+      // Handle win check
+      if (widget.level.grid.atPosition(playerPosition).isGoal) {
+        // TODO play winning animation
+      } else {
+        // TODO unsuccessful
+      }
+      setState(() {
+        isAnimating = false;
+      });
+      return;
+    }
+
+    // Move player to next position
+    setState(() {
+      playerPosition = moves.removeFirst();
+    });
   }
 
 }
