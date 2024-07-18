@@ -25,4 +25,9 @@ class Tile {
   bool get isGoal => type == TileType.goal;
   bool get isFloor => type == TileType.floor;
   bool get isWall => type == TileType.wall;
+
+  @override
+  String toString() {
+    return type.textRepresentation;
+  }
 }
