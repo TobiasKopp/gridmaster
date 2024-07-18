@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grid_master/levels/tutorial/tutorial_1.dart';
 
 /// COLORS
 const Color kColorGridLines = Color(0xff000000);
@@ -35,4 +34,19 @@ const Widget kHSpace_24 = SizedBox(width: 24);
 const Widget kHSpace_32 = SizedBox(width: 32);
 
 /// DEFAULT LEVEL
-final L_DEFAULT = L_TUTORIAL_1;
+const int DEFAULT_LEVEL_WIDTH = 11;
+const int DEFAULT_LEVEL_HEIGHT = 11;
+
+const List<List<String>> L_DEFAULT = [
+  ['W', 'W', 'W', 'W', 'W', 'E', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'F', 'W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'W'],
+];

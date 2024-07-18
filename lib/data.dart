@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:grid_master/constants.dart';
 import 'package:grid_master/controls/input_sequence.dart';
-import 'package:grid_master/tiles/tile_widget.dart';
-import 'dart:math';
 
+import 'game/grid.dart';
 import 'game/level.dart';
-import 'game/tile.dart';
-import 'levels/grid_converter.dart';
+
 
 class Data extends ChangeNotifier {
 
   /// CURRENT LEVEL
-  Level LEVEL = L_DEFAULT;
+  Level LEVEL = Level(grid: Grid.fromRaw(L_DEFAULT));
   void setLevel(Level newValue) {
     LEVEL = newValue;
-    tiles = GridConverter.convertGrid(LEVEL.grid);
-    notifyListeners();
-  }
-
-  /// CURRENT GRID TILES
-  List<Widget> tiles = GridConverter.convertGrid(L_DEFAULT.grid);
-  void generateRandomTiles(int n) {
-    tiles = List.generate(n, (index) => TileWidget(
-      type: TileType.values[Random().nextInt(TileType.values.length)],
-    ));
     notifyListeners();
   }
 

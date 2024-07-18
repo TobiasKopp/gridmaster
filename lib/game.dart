@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:grid_master/controls/controller_widget.dart';
 import 'package:grid_master/grid_widget.dart';
 import 'package:grid_master/widgets/level_chooser.dart';
+import 'package:provider/provider.dart';
+
+import 'data.dart';
 
 class GameWidget extends StatelessWidget {
   const GameWidget({
@@ -22,8 +25,7 @@ class GameWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GridWidget(
-              width: width,
-              height: height,
+              level: Provider.of<Data>(context).LEVEL,
             ),
 
             const ControllerWidget(),

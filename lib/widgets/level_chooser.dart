@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data.dart';
-import '../generate_button.dart';
+import '../controls/generate_button.dart';
 import '../levels/tutorial/tutorial_1.dart';
 import '../levels/tutorial/tutorial_5.dart';
 
