@@ -7,7 +7,7 @@ import 'package:grid_master/data.dart';
 
 import '../game/grid.dart';
 import '../game/position.dart';
-import '../grid_widget.dart';
+import '../widgets/grid_widget.dart';
 
 class StartButton extends StatelessWidget {
   const StartButton({Key? key}) : super(key: key);
@@ -43,13 +43,8 @@ class StartButton extends StatelessWidget {
             positions.add(pos);
           }
 
-
+          // Add positions (moves) to global player controller
           PLAYER_STREAM_CONTROLLER.sink.add(positions);
-
-
-
-
-
         },
         style: const ButtonStyle(
           // TODO

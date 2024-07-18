@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:grid_master/constants.dart';
 import 'package:grid_master/controls/input_sequence.dart';
 
-import 'game/grid.dart';
 import 'game/level.dart';
 
 
 class Data extends ChangeNotifier {
 
   /// CURRENT LEVEL
-  Level LEVEL = Level(grid: Grid.fromRaw(L_DEFAULT));
+  Level LEVEL = DEFAULT_LEVEL;
   void setLevel(Level newValue) {
     LEVEL = newValue;
     notifyListeners();
@@ -34,4 +33,5 @@ class Data extends ChangeNotifier {
     inputSequence.clear();
     notifyListeners();
   }
+
 }

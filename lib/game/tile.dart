@@ -1,9 +1,9 @@
 /// Defines the different types a tile can be
 enum TileType {
-  start("S"),
-  goal("G"),
-  floor("F"),
-  wall("F");
+  start('S'),
+  goal('G'),
+  floor('F'),
+  wall('W');
 
   final String textRepresentation;
 

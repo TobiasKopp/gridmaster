@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:grid_master/levels/grid_converter.dart';
+import 'package:grid_master/widgets/grid_converter.dart';
 
-import 'constants.dart';
-import 'game/level.dart';
-import 'game/position.dart';
+import '../constants.dart';
+import '../game/level.dart';
+import '../game/position.dart';
 
 final StreamController<Queue<Position>> PLAYER_STREAM_CONTROLLER = StreamController<Queue<Position>>();
 

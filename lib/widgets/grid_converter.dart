@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../game/grid.dart';
 import '../game/tile.dart';
-import '../tiles/tile_widget.dart';
+import 'tile_widget.dart';
 
 class GridConverter {
   static List<Widget> convertList(List<List<String>> grid) {
