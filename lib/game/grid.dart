@@ -52,6 +52,20 @@ class Grid {
     throw IllegalGridException("No goal tile found.");
   }
 
+  @override
+  String toString() {
+    String res = "${"-" * (width * 2 + 3)}\n";
+    for (List<Tile> row in tiles) {
+      res += "| ";
+      for (Tile t in row) {
+        res += "$t ";
+      }
+      res += "|\n";
+    }
+    res += "${"-" * (width * 2 + 3)}\n";
+    return res;
+  }
+
 }
 
 class IllegalGridException implements Exception {
