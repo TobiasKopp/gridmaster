@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grid_master/game_widget.dart';
-import 'package:grid_master/widgets/grid_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'data.dart';
+import 'game.dart';
 
 void main() {
   runApp(
