@@ -5,8 +5,13 @@ class Position {
 
   const Position(this.row, this.column);
 
+  bool equals(Position other) {
+    return row==other.row && column==other.column;
+  }
+
   @override
   String toString() {
     return "($row,$column)";
   }
+
 }

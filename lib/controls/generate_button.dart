@@ -1,26 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../constants.dart';
-import '../data.dart';
 import '../game/grid.dart';
 import '../game/level.dart';
+import '../game/logic.dart';
 import '../game/tile.dart';
 
 class GenerateButton extends StatelessWidget {
-  const GenerateButton({required this.nTiles, Key? key}) : super(key: key);
-
-  final int nTiles;
+  const GenerateButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => Provider.of<Data>(context, listen: false).setLevel(Level(
+      onPressed: () => Logic.switchToLevel(context, Level(
           grid: generateRandomGrid(DEFAULT_LEVEL_WIDTH, DEFAULT_LEVEL_HEIGHT)
       )),
-      icon: Icon(Icons.autorenew),
+      icon: const Icon(Icons.autorenew),
       iconSize: 40,
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grid_master/constants.dart';
 import 'package:grid_master/controls/input_sequence.dart';
+import 'package:grid_master/game/logic.dart';
 
 import 'game/level.dart';
 
@@ -11,6 +12,14 @@ class Data extends ChangeNotifier {
   Level LEVEL = DEFAULT_LEVEL;
   void setLevel(Level newValue) {
     LEVEL = newValue;
+    notifyListeners();
+  }
+
+
+  /// CURRENT GAME STATE
+  GameState gameState = GameState.initial;
+  void setGameState(GameState newValue) {
+    gameState = newValue;
     notifyListeners();
   }
 

@@ -7,6 +7,7 @@ import 'package:grid_master/widgets/grid_converter.dart';
 import '../constants.dart';
 import '../game/level.dart';
 import '../game/position.dart';
+import 'grid_cover/grid_cover.dart';
 
 final StreamController<Queue<Position>> PLAYER_STREAM_CONTROLLER = StreamController<Queue<Position>>();
 
@@ -23,7 +24,7 @@ class GridWidget extends StatefulWidget {
   late List<Widget> tileWidgets;
 
   // Logic
-  Stream<Queue<Position>> moveStream = PLAYER_STREAM_CONTROLLER.stream;
+  final Stream<Queue<Position>> moveStream = PLAYER_STREAM_CONTROLLER.stream;
 
   // Visuals
   final double tileSize = 50;
@@ -36,10 +37,10 @@ class GridWidget extends StatefulWidget {
   State<GridWidget> createState() => _GridWidgetState();
 }
 
-class _GridWidgetState extends State<GridWidget> {
+class _GridWidgetState extends State<GridWidget>
+    with SingleTickerProviderStateMixin {
   late Position playerPosition;
   bool isAnimating = false;
-  bool isPlayerShown = false;
   late Queue<Position> moves;
 
   @override
@@ -53,6 +54,8 @@ class _GridWidgetState extends State<GridWidget> {
     });
     super.initState();
   }
+
+
 
 
   @override
@@ -105,6 +108,9 @@ class _GridWidgetState extends State<GridWidget> {
             ),
 
             player,
+
+            GridCover(),
+
           ],
         )
       ),
@@ -112,9 +118,7 @@ class _GridWidgetState extends State<GridWidget> {
   }
 
   void onAnimationEnd() {
-    // if (!isPlayerShown) {
-    //   isPlayerShown = true;
-    // }
+    if (!isAnimating) playerPosition = widget.level.grid.start();
 
     if (moves.isEmpty) {
       // Handle win check
@@ -129,9 +133,19 @@ class _GridWidgetState extends State<GridWidget> {
       return;
     }
 
+    Position nextPosition;
+    do {
+      nextPosition = moves.removeFirst();
+    } while (nextPosition.equals(playerPosition));
+
+    // Position nextPosition = moves.removeFirst();
+    // if (nextPosition.equals(playerPosition)) {
+    //
+    // }
+
     // Move player to next position
     setState(() {
-      playerPosition = moves.removeFirst();
+      playerPosition = nextPosition;
     });
   }
 

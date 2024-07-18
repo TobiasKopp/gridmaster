@@ -1,7 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:grid_master/game/position.dart';
+import 'package:provider/provider.dart';
 
 import '../controls/input_sequence.dart';
+import '../data.dart';
 import 'grid.dart';
+import 'level.dart';
+
+enum GameState {
+  initial, countdown, showing, covered, failed, won;
+}
 
 class Logic {
   static Position computeNextPosition(Grid grid, Position pos, InputAction action) {
@@ -48,6 +56,14 @@ class Logic {
 
       default:
         throw Exception("Unreachable");
+    }
+  }
+
+  static void switchToLevel(BuildContext context, Level level) {
+    if (Provider.of<Data>(context, listen: false).LEVEL != level) {
+      Provider.of<Data>(context, listen: false).setLevel(level);
+      Provider.of<Data>(context, listen: false).setGameState(GameState.initial);
+      Provider.of<Data>(context, listen: false).inputSequenceClear();
     }
   }
 }
