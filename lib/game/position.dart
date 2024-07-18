@@ -4,4 +4,9 @@ class Position {
   final int column;
 
   const Position(this.row, this.column);
+
+  @override
+  String toString() {
+    return "($row,$column)";
+  }
 }
