@@ -12,9 +12,14 @@ const Color kColorGoalTile = Color(0xff9710af);
 const Color kColorPlayer = Color(0xffd51313);
 const Color kColorControllerArrow = Color(0xff3d3d3d);
 const Color kColorInputSequenceDisplay = Colors.grey;
+const Color kColorTimerBar = Color(0xffe79429);
 
 
 const double kGridLineThickness = 0.4;
+
+
+/// LAYOUT
+const double kGridMaxWidth = 500;
 
 
 

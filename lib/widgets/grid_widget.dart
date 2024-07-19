@@ -3,9 +3,13 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:grid_master/widgets/grid_converter.dart';
+import 'package:grid_master/widgets/grid_cover/grid_cover_showing.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
+import '../data.dart';
 import '../game/level.dart';
+import '../game/logic.dart';
 import '../game/position.dart';
 import 'grid_cover/grid_cover.dart';
 
@@ -60,6 +64,9 @@ class _GridWidgetState extends State<GridWidget>
 
   @override
   Widget build(BuildContext context) {
+    bool showTimerBar = Provider.of<Data>(context).gameState == GameState.showing
+        || Provider.of<Data>(context).gameState == GameState.countdown;
+
     var playerSize = widget.tileSize - 20;
     Widget player = AnimatedPositioned(
       top: playerPosition.row * widget.tileSize,
@@ -109,8 +116,7 @@ class _GridWidgetState extends State<GridWidget>
 
             player,
 
-            GridCover(),
-
+            GridCover(level: widget.level, width: widget.level.grid.width * widget.tileSize + 2*kGridLineThickness,),
           ],
         )
       ),
@@ -133,15 +139,11 @@ class _GridWidgetState extends State<GridWidget>
       return;
     }
 
+    // Don't move if move not possible TODO -> refactor
     Position nextPosition;
     do {
       nextPosition = moves.removeFirst();
     } while (nextPosition.equals(playerPosition));
-
-    // Position nextPosition = moves.removeFirst();
-    // if (nextPosition.equals(playerPosition)) {
-    //
-    // }
 
     // Move player to next position
     setState(() {

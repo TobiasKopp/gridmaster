@@ -13,13 +13,12 @@ class _AnimatedCountdown extends StatefulWidget {
 }
 
 class _AnimatedCountdownState extends State<_AnimatedCountdown>
-  with TickerProviderStateMixin {
-  late AnimationController _controller;
-
-  int _displayNumber = 3;
+    with TickerProviderStateMixin {
 
   late Animation<double> _fontSizeAnimation;
   late Animation<double> _opacityAnimation;
+  late AnimationController _controller;
+  int _displayNumber = 3;
 
   @override
   void initState() {
