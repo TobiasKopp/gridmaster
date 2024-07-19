@@ -8,6 +8,9 @@ import '../../game/level.dart';
 import '../../game/logic.dart';
 import 'grid_cover_countdown.dart';
 import 'grid_cover_covering.dart';
+import 'grid_cover_failed.dart';
+import 'grid_cover_running.dart';
+import 'grid_cover_won.dart';
 
 class GridCover extends StatelessWidget {
   const GridCover({
@@ -26,9 +29,9 @@ class GridCover extends StatelessWidget {
       case GameState.countdown: return GridCoverCountdown();
       case GameState.showing: return GridCoverShowing(duration: level.showDuration, width: width);
       case GameState.covered: return GridCoverCovering();
-      case GameState.running: return Container();
-      case GameState.failed: return GridCoverInitial();
-      case GameState.won: return GridCoverInitial();
+      case GameState.running: return GridCoverRunning();
+      case GameState.failed: return GridCoverFailed();
+      case GameState.won: return GridCoverWon();
     }
   }
 }

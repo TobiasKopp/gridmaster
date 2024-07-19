@@ -64,9 +64,6 @@ class _GridWidgetState extends State<GridWidget>
 
   @override
   Widget build(BuildContext context) {
-    bool showTimerBar = Provider.of<Data>(context).gameState == GameState.showing
-        || Provider.of<Data>(context).gameState == GameState.countdown;
-
     var playerSize = widget.tileSize - 20;
     Widget player = AnimatedPositioned(
       top: playerPosition.row * widget.tileSize,
@@ -114,9 +111,9 @@ class _GridWidgetState extends State<GridWidget>
               ),
             ),
 
-            player,
-
             GridCover(level: widget.level, width: widget.level.grid.width * widget.tileSize + 2*kGridLineThickness,),
+
+            player,
           ],
         )
       ),
@@ -124,20 +121,22 @@ class _GridWidgetState extends State<GridWidget>
   }
 
   void onAnimationEnd() {
-    if (!isAnimating) playerPosition = widget.level.grid.start();
-
-    if (moves.isEmpty) {
-      // Handle win check
-      if (widget.level.grid.atPosition(playerPosition).isGoal) {
-        // TODO play winning animation
-      } else {
-        // TODO unsuccessful
-      }
-      setState(() {
-        isAnimating = false;
-      });
+    // If goal reached, game is won (even if more moves should come)
+    if (widget.level.grid.atPosition(playerPosition).isGoal) {
+      Provider.of<Data>(context, listen: false).setGameState(GameState.won);
+      setState(() { isAnimating = false; });
       return;
     }
+
+    // If no moves left and goal not reached, game is lost
+    if (moves.isEmpty) {
+      Provider.of<Data>(context, listen: false).setGameState(GameState.failed);
+      setState(() { isAnimating = false; });
+      return;
+    }
+
+    // Put player on start field when not animating
+    if (!isAnimating) playerPosition = widget.level.grid.start();
 
     // Don't move if move not possible TODO -> refactor
     Position nextPosition;
@@ -152,6 +151,3 @@ class _GridWidgetState extends State<GridWidget>
   }
 
 }
-
-
-

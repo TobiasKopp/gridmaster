@@ -36,6 +36,3 @@ class GridCoverInitial extends StatelessWidget {
     );
   }
 }
-
-
-
