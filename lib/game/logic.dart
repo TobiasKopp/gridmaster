@@ -8,7 +8,7 @@ import 'grid.dart';
 import 'level.dart';
 
 enum GameState {
-  initial, countdown, showing, covered, failed, won;
+  initial, countdown, showing, covered, running, failed, won;
 }
 
 class Logic {
