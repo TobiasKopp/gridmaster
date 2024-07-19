@@ -121,6 +121,9 @@ class _GridWidgetState extends State<GridWidget>
   }
 
   void onAnimationEnd() {
+    // Put player on start field when not animating
+    if (!isAnimating) playerPosition = widget.level.grid.start();
+
     // If goal reached, game is won (even if more moves should come)
     if (widget.level.grid.atPosition(playerPosition).isGoal) {
       Provider.of<Data>(context, listen: false).setGameState(GameState.won);
@@ -129,14 +132,11 @@ class _GridWidgetState extends State<GridWidget>
     }
 
     // If no moves left and goal not reached, game is lost
-    if (moves.isEmpty) {
+    if (moves.isEmpty && Provider.of<Data>(context, listen: false).gameState != GameState.won) {
       Provider.of<Data>(context, listen: false).setGameState(GameState.failed);
       setState(() { isAnimating = false; });
       return;
     }
-
-    // Put player on start field when not animating
-    if (!isAnimating) playerPosition = widget.level.grid.start();
 
     // Don't move if move not possible TODO -> refactor
     Position nextPosition;
