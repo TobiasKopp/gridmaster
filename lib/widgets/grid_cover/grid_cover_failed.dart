@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grid_master/constants.dart';
+import 'package:provider/provider.dart';
+
+import '../../data.dart';
+import '../../game/logic.dart';
 
 
 class GridCoverFailed extends StatelessWidget {
@@ -53,7 +57,9 @@ class GridCoverFailed extends StatelessWidget {
   }
 
   void restart(BuildContext context) {
-    // TODO
+    // TODO increment attempt counter
+    Provider.of<Data>(context, listen: false).inputSequenceClear();
+    Provider.of<Data>(context, listen: false).setGameState(GameState.countdown);
   }
 
 }

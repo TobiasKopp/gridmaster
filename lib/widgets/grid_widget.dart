@@ -120,9 +120,21 @@ class _GridWidgetState extends State<GridWidget>
     );
   }
 
+  // TODO refactor. buggy. Use TweenSequence
+  // https://flexiple.com/app/advanced-flutter-animations
+  //
+  // the order of statements is important
   void onAnimationEnd() {
+    print("next Animatiom");
+
+
     // Put player on start field when not animating
     if (!isAnimating) playerPosition = widget.level.grid.start();
+
+    // Do nothing if already won
+    if (Provider.of<Data>(context, listen: false).gameState == GameState.won) {
+      return;
+    }
 
     // If goal reached, game is won (even if more moves should come)
     if (widget.level.grid.atPosition(playerPosition).isGoal) {
@@ -146,6 +158,7 @@ class _GridWidgetState extends State<GridWidget>
       } while (nextPosition.equals(playerPosition));
     } on StateError {
       // Failed
+      print('failed');
       Provider.of<Data>(context, listen: false).setGameState(GameState.failed);
       setState(() { isAnimating = false; });
       return;
