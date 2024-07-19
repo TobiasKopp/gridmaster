@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grid_master/game/logic.dart';
 import 'package:provider/provider.dart';
 
 import '../data.dart';
@@ -15,7 +16,9 @@ class InputActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Provider.of<Data>(context, listen: false).inputSequenceAdd(action),
+      onPressed: !Logic.isControlAvailable(context)
+          ? null
+          : () => Provider.of<Data>(context, listen: false).inputSequenceAdd(action),
       style: ButtonStyle(
         // TODO
 

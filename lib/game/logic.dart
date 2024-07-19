@@ -66,4 +66,9 @@ class Logic {
       Provider.of<Data>(context, listen: false).inputSequenceClear();
     }
   }
+
+  static bool isControlAvailable(BuildContext context) {
+    return Provider.of<Data>(context).gameState == GameState.covered;
+  }
+
 }

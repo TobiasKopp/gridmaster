@@ -140,9 +140,16 @@ class _GridWidgetState extends State<GridWidget>
 
     // Don't move if move not possible TODO -> refactor
     Position nextPosition;
-    do {
-      nextPosition = moves.removeFirst();
-    } while (nextPosition.equals(playerPosition));
+    try {
+      do {
+        nextPosition = moves.removeFirst();
+      } while (nextPosition.equals(playerPosition));
+    } on StateError {
+      // Failed
+      Provider.of<Data>(context, listen: false).setGameState(GameState.failed);
+      setState(() { isAnimating = false; });
+      return;
+    }
 
     // Move player to next position
     setState(() {
